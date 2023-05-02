@@ -1,18 +1,37 @@
 {% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
 
-<!-- Название у нас будет products -->
+
 {% block title %}
-News
+NewsList
 {% endblock title %}
 
-<!-- В контенте на странице мы выводим все товары -->
 {% block content %}
    <h1>Все новости</h1>
-   <!-- Выводим товары, только если они есть с помощью тега if -->
-   {% if news %}
-       {{ news }}
+   <h3>{% current_time '%b %d %Y' %}</h3>
+
+   <hr>
+   {% if news_list %}
+       <table>
+           <tr>
+               <td>Категория</td>
+               <td>Заголовок</td>
+               <td>Дата публикации</td>
+               <td>Новость</td>
+           </tr>
+
+           {% for news in news_list %}
+           <tr>
+               <td>{{ news.category.name }}</td>
+               <td>{{ news.name|slice:":20"|censor }}</td>
+               <td>{{ news.pub_date|date:"d.m.Y H:i:s" }}</td>
+               <td>{{ news.description|slice:":20"|censor }}</td>
+           </tr>
+           {% endfor %}
+
+       </table>
    {% else %}
-       <!-- Если товаров нет, говорим, что товаров нет ;) -->
        <h2>Новостей нет!</h2>
    {% endif %}
 {% endblock content %}
