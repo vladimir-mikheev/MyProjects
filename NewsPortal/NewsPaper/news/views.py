@@ -1,14 +1,65 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import News
+from .filters import NewsFilter
+from .forms import NewsForm
+from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse_lazy
+
 
 class NewsList(ListView):
     model = News
     ordering = 'name'
     template_name = 'news_list.html'
     context_object_name = 'news_list'
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.filterset = NewsFilter(self.request.GET, queryset)
+        return self.filterset.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filterset'] = self.filterset
+        return context
 
 
 class NewsDetail(DetailView):
     model = News
     template_name = 'news_detail.html'
     context_object_name = 'news_detail'
+
+
+class NewsCreate(CreateView):
+    form_class = NewsForm
+    model = News
+    template_name = 'news_edit.html'
+
+
+class NewsUpdate(UpdateView):
+    form_class = NewsForm
+    model = News
+    template_name = 'news_edit.html'
+
+
+class NewsDelete(DeleteView):
+    model = News
+    template_name = 'news_delete.html'
+    success_url = reverse_lazy('news_list')
+
+
+class NewsSearch(NewsList):
+    model = News
+    ordering = 'name'
+    template_name = 'news_search.html'
+    context_object_name = 'news_search'
+    paginate_by = 10
+
+
+
+

@@ -9,5 +9,5 @@ NewsDetail
 {% block content %}
 <h2>{{ news_detail.name|censor }}</h2>
 <p>{{ news_detail.description|censor }}</p>
-<p>Дата публикации: {{ news_detail.pub_date|date:"d.m.Y" }}</p>
+<p>Автор и дата публикации: {{ news_detail.author }}, {{ news_detail.pub_date|date:"d.m.Y" }}</p>
 {% endblock content %}
