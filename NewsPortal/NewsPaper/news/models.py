@@ -5,6 +5,15 @@ from django.urls import reverse
 
 
 class News(models.Model):
+    news = 'NE'
+    article = 'AR'
+
+    POST_TYPES = [
+        (news, 'Новость'),
+        (article, 'Статья'),
+    ]
+
+    post_type = models.CharField(max_length=2, choices=POST_TYPES, default=article, verbose_name='Вид поста')
     name = models.CharField(max_length=50, unique=True)
     description = models.TextField()
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE, related_name='news')

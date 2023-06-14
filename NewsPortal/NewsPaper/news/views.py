@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import News
+from .models import *
 from .filters import NewsFilter
 from .forms import NewsForm
 from django.shortcuts import render, HttpResponseRedirect
@@ -39,6 +39,15 @@ class NewsCreate(CreateView):
     form_class = NewsForm
     model = News
     template_name = 'news_edit.html'
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        if 'news' in self.request.path:
+            category = Category.objects.get(name='Новость')
+        elif 'article' in self.request.path:
+            category = Category.objects.get(name='Статья')
+        self.objects.category = category
+        return super().form_valid(form)
 
 
 class NewsUpdate(UpdateView):
