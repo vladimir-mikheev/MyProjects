@@ -43,10 +43,10 @@ class NewsCreate(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         if 'news' in self.request.path:
-            category = Category.objects.get(name='Новость')
+            post_type = 'NE'
         elif 'article' in self.request.path:
-            category = Category.objects.get(name='Статья')
-        self.objects.category = category
+            post_type = 'AR'
+        self.object.post_type = post_type
         return super().form_valid(form)
 
 
