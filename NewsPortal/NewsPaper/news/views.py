@@ -4,6 +4,10 @@ from .filters import NewsFilter
 from .forms import NewsForm
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
 class NewsList(ListView):
@@ -50,6 +54,7 @@ class NewsCreate(CreateView):
         return super().form_valid(form)
 
 
+@method_decorator(login_required(login_url='/login/'), name='dispatch',)
 class NewsUpdate(UpdateView):
     form_class = NewsForm
     model = News
