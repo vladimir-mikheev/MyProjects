@@ -152,4 +152,10 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+<<<<<<< Updated upstream
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+=======
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+>>>>>>> Stashed changes

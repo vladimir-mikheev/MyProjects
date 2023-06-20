@@ -8,7 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
+<<<<<<< Updated upstream
 
+=======
+from django.contrib.auth.mixins import PermissionRequiredMixin
+>>>>>>> Stashed changes
 
 class NewsList(ListView):
     model = News
@@ -39,7 +43,8 @@ class NewsDetail(DetailView):
     context_object_name = 'news_detail'
 
 
-class NewsCreate(CreateView):
+class NewsCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'news.add_news'
     form_class = NewsForm
     model = News
     template_name = 'news_edit.html'
@@ -55,13 +60,19 @@ class NewsCreate(CreateView):
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch',)
+<<<<<<< Updated upstream
 class NewsUpdate(UpdateView):
+=======
+class NewsUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'news.change_news'
+>>>>>>> Stashed changes
     form_class = NewsForm
     model = News
     template_name = 'news_edit.html'
 
 
-class NewsDelete(DeleteView):
+class NewsDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'news.delete_news'
     model = News
     template_name = 'news_delete.html'
     success_url = reverse_lazy('news_list')
