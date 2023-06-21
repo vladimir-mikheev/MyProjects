@@ -8,11 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-<<<<<<< Updated upstream
-
-=======
 from django.contrib.auth.mixins import PermissionRequiredMixin
->>>>>>> Stashed changes
+from django.core.mail import send_mail
 
 class NewsList(ListView):
     model = News
@@ -60,12 +57,8 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
 
 
 @method_decorator(login_required(login_url='/login/'), name='dispatch',)
-<<<<<<< Updated upstream
-class NewsUpdate(UpdateView):
-=======
 class NewsUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'news.change_news'
->>>>>>> Stashed changes
     form_class = NewsForm
     model = News
     template_name = 'news_edit.html'
@@ -86,5 +79,17 @@ class NewsSearch(NewsList):
     paginate_by = 10
 
 
+class Subscribe(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'make_appointment.html', {})
 
+    def post(self, request, *args, **kwargs):
+        appointment = Appointment(
+            date=datetime.strptime(request.POST['date'], '%Y-%m-%d'),
+            client_name=request.POST['client_name'],
+            message=request.POST['message'],
+        )
+        appointment.save()
+
+        return redirect('')
 

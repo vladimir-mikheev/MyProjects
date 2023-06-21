@@ -4,12 +4,9 @@
 <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
 <div> Здесь может содержаться персональная информация для каждого пользователя </div>
 
-<<<<<<< Updated upstream
-=======
 {% if is_not_premium %}
 <button> <a href="sign/upgrade/"> Хочу Premium!</a> </button>
 {% endif %}
 
->>>>>>> Stashed changes
 <button> <a href="sign/logout/">Выйти</a> </button>
 {% endblock %}

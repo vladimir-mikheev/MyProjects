@@ -1,10 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from .views import BaseRegisterView
-<<<<<<< Updated upstream
-=======
 from .views import upgrade_me
->>>>>>> Stashed changes
 
 urlpatterns = [
     path('login/',
@@ -16,8 +13,5 @@ urlpatterns = [
     path('signup/',
          BaseRegisterView.as_view(template_name = 'sign/signup.html'),
          name='signup'),
-<<<<<<< Updated upstream
-=======
     path('upgrade/', upgrade_me, name = 'upgrade')
->>>>>>> Stashed changes
 ]

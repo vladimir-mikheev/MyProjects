@@ -1,11 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-<<<<<<< Updated upstream
-=======
 from allauth.account.forms import SignupForm
 from django.contrib.auth.models import Group
->>>>>>> Stashed changes
 
 
 class BaseRegisterForm(UserCreationForm):
@@ -20,9 +17,6 @@ class BaseRegisterForm(UserCreationForm):
                   "last_name",
                   "email",
                   "password1",
-<<<<<<< Updated upstream
-                  "password2", )
-=======
                   "password2", )
 
 
@@ -35,4 +29,3 @@ class BasicSignupForm(SignupForm):
         return user
 
 
->>>>>>> Stashed changes

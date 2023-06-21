@@ -19,6 +19,7 @@ class News(models.Model):
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE, related_name='news')
     author = models.ForeignKey(to='Author1', on_delete=models.CASCADE)
     pub_date = models.DateField(default=timezone.now)
+    subscribers = models.ManyToManyField(to='Category', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.name.title()}: {self.description[:20]}'
