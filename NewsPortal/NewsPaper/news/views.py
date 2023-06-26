@@ -2,14 +2,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import *
 from .filters import NewsFilter
 from .forms import NewsForm
-from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.core.mail import send_mail
+from django.shortcuts import redirect
+from django.views import View
+from .utils import send_article_email
 
 class NewsList(ListView):
     model = News
@@ -39,6 +38,11 @@ class NewsDetail(DetailView):
     template_name = 'news_detail.html'
     context_object_name = 'news_detail'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.object.category
+        return context
+
 
 class NewsCreate(PermissionRequiredMixin, CreateView):
     permission_required = 'news.add_news'
@@ -53,10 +57,14 @@ class NewsCreate(PermissionRequiredMixin, CreateView):
         elif 'article' in self.request.path:
             post_type = 'AR'
         self.object.post_type = post_type
+        self.object.save()
+        # Отправка уведомления о новой новости
+        send_article_email(self.object)
         return super().form_valid(form)
 
 
-@method_decorator(login_required(login_url='/login/'), name='dispatch',)
+
+@method_decorator(login_required(login_url='/login/'), name='dispatch')
 class NewsUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'news.change_news'
     form_class = NewsForm
@@ -78,6 +86,10 @@ class NewsSearch(NewsList):
     context_object_name = 'news_search'
     paginate_by = 10
 
-
-
-
+class SubscribeCategoryView(View):
+    def post(self, request, *args, **kwargs):
+        category_id = self.kwargs['category_id']
+        category = Category.objects.get(id=category_id)
+        user = request.user
+        category.subscribers.add(user)
+        return redirect('news_list')

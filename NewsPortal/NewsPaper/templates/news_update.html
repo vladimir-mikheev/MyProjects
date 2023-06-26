@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>{{ news_title }}</title>
+</head>
+<body>
+  <h1>Здравствуй, {{ username }}. Новая статья в твоём любимом разделе!</h1>
+  <h2>{{ news_detail.name|censor }}</h2>
+  <p>{{ news_detail.description|censor }}</p>
+</body>
+</html>
