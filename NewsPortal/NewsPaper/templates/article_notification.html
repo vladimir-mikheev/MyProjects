@@ -6,6 +6,6 @@
 <body>
     <h2>{{ article.name }}</h2>
     <p>{{ article.description|slice:":50" }}</p>
-    <p>Здравствуй, {{ user.username }}. Новая статья в твоём любимом разделе!</p>
+    <p>Здравствуй, {{ user.username }}. <a href="{{ link }}">Новая статья</a> в твоём любимом разделе!</p>
 </body>
 </html>

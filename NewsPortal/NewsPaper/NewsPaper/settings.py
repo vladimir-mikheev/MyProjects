@@ -174,8 +174,6 @@ ACCOUNT_EMAIL_SUBJECT_PREFIX = None
 
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = ''
 
-ACCOUNT_EMAIL_CONFIRMATION_TEMPLATE = 'account/email_confirmation_subject.html'
-
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 DEFAULT_FROM_EMAIL = 'david.draiman666@yandex.ru'
