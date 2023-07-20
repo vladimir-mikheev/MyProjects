@@ -1,0 +1,20 @@
+([('CalcHeight.exe',
+   'C:\\Users\\vovan\\PycharmProjects\\Калькулятор '
+   'роста\\build\\CalcHeight\\CalcHeight.exe',
+   'EXECUTABLE'),
+  ('python310.dll', 'C:\\Python\\python310.dll', 'BINARY'),
+  ('VCRUNTIME140.dll', 'C:\\Python\\VCRUNTIME140.dll', 'BINARY'),
+  ('_decimal.pyd', 'C:\\Python\\DLLs\\_decimal.pyd', 'EXTENSION'),
+  ('_hashlib.pyd', 'C:\\Python\\DLLs\\_hashlib.pyd', 'EXTENSION'),
+  ('select.pyd', 'C:\\Python\\DLLs\\select.pyd', 'EXTENSION'),
+  ('_socket.pyd', 'C:\\Python\\DLLs\\_socket.pyd', 'EXTENSION'),
+  ('_lzma.pyd', 'C:\\Python\\DLLs\\_lzma.pyd', 'EXTENSION'),
+  ('_bz2.pyd', 'C:\\Python\\DLLs\\_bz2.pyd', 'EXTENSION'),
+  ('unicodedata.pyd', 'C:\\Python\\DLLs\\unicodedata.pyd', 'EXTENSION'),
+  ('_ssl.pyd', 'C:\\Python\\DLLs\\_ssl.pyd', 'EXTENSION'),
+  ('libcrypto-1_1.dll', 'C:\\Python\\DLLs\\libcrypto-1_1.dll', 'BINARY'),
+  ('libssl-1_1.dll', 'C:\\Python\\DLLs\\libssl-1_1.dll', 'BINARY'),
+  ('base_library.zip',
+   'C:\\Users\\vovan\\PycharmProjects\\Калькулятор '
+   'роста\\build\\CalcHeight\\base_library.zip',
+   'DATA')],)
