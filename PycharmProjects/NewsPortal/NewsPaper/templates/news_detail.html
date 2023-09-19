@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %}
+NewsDetail
+{% endblock title %}
+
+{% block content %}
+<h2>{{ news_detail.name|censor }}</h2>
+<p>{{ news_detail.description|censor }}</p>
+<p>Автор и дата публикации: {{ news_detail.author }}, {{ news_detail.pub_date|date:"d.m.Y" }}</p>
+
+{% if user.is_authenticated %}
+    {% if category in user.subscribed_categories.all %}
+        <button class="btn btn-primary" disabled>Вы подписаны на {{ news_detail.category.name }}</button>
+    {% else %}
+        <form action="{% url 'subscribe_category' category.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Подписаться на {{ news_detail.category.name }}</button>
+        </form>
+    {% endif %}
+{% endif %}
+{% endblock content %}

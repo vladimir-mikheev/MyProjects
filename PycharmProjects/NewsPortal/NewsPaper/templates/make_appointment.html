@@ -1,0 +1,15 @@
+{% block title %}
+Appointment
+<p>{{ appointment.client_name }}</p>
+{% endblock title %}
+
+{% block content %}
+ало ебать
+{{ appointment.client_name }}
+<form action="" method="post">
+    {% csrf_token %}
+<p>{{ appointment.client_name }}</p>
+<p>{{ appointment.message }}</p>
+<p>{{ appointment.date|date:"d-M-Y" }}</p>
+
+{% endblock content %}
